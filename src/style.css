@@ -155,3 +155,12 @@ article.card{cursor:pointer}article.card:focus-visible{outline:2px solid #f4a565
   .nav.open a:hover,.nav.open a:focus-visible{color:#ffb578}
   .nav.open .nav-admin{background:#30251d;border:1px solid #ffad6845;color:#ffb578}
 }
+
+/* Give every article card the same rhythm and baseline across grid rows. */
+.cards,.favorites-grid{grid-auto-rows:1fr;align-items:stretch}
+.cards>.card,.favorites-grid>.card{display:flex;height:100%;flex-direction:column}
+.cards>.card>.card-art,.favorites-grid>.card>.card-art{flex:0 0 auto}
+.cards>.card>.card-content,.favorites-grid>.card>.card-content{display:flex;flex:1;flex-direction:column;align-items:stretch}
+.cards>.card .card-content h3,.favorites-grid>.card .card-content h3{display:-webkit-box;min-height:3.4em;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.cards>.card .card-content>p,.favorites-grid>.card .card-content>p{display:-webkit-box;min-height:5.55em;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3}
+.cards>.card .card-bottom,.favorites-grid>.card .card-bottom{margin-top:auto}
