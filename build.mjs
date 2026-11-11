@@ -1,0 +1,11 @@
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+const template=await readFile('index.template.html','utf8');
+const css=await readFile('src/style.css','utf8');
+const data=(await readFile('src/data.js','utf8')).replace(/^export\s+/m,'');
+const app=(await readFile('src/main.js','utf8')).replace(/^import\s+\{\s*seedArticles\s*\}\s+from\s+['"]\.\/data\.js['"];?\s*/m,'');
+const firebaseConfig=await readFile('firebase-config.js','utf8');
+const html=template.replace('/* INLINE_CSS */',css).replace('/* FIREBASE_CONFIG */',firebaseConfig).replace('/* INLINE_APP */',`${data}\n(async function(){\n${app}\n})();`);
+await writeFile('index.html',html,'utf8');
+await mkdir('dist',{recursive:true});
+await writeFile('dist/index.html',html,'utf8');
+console.log('Standalone site generated: open index.html directly, or deploy dist/.');
